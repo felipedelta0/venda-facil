@@ -1,0 +1,32 @@
+# Binários compilados
+*.exe
+*.out
+*.o
+*.so
+
+# Diretório de dependências do Go
+/vendor/
+
+# Arquivos de cache e build do Go
+*.test
+*.sum
+*.mod
+
+# Pastas do Go
+/bin/
+/pkg/
+
+# Diretórios de IDEs e editores
+.idea/
+.vscode/
+
+# Logs e arquivos temporários
+*.log
+*.swp
+
+# Docker
+.dockerignore
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
