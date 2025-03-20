@@ -1,15 +1,23 @@
 package main
 
 import (
+	"flag"
+	"log"
 	"venda-facil/api/routes"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	port := flag.String("port", "8080", "porta para rodar a aplicação")
+	flag.Parse()
+
 	router := gin.Default()
 
 	routes.SetupRoutes(router)
 
-	router.Run(":8080")
+	log.Printf("Servidor rodando na porta %s...", *port)
+	if err := router.Run(":" + *port); err != nil {
+		log.Fatal("Erro ao iniciar o servidor:", err)
+	}
 }
