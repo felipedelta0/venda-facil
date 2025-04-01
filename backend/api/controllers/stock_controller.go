@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"venda-facil/api/models"
+	"vendaFacil/api/models"
 
 	"github.com/gin-gonic/gin"
 )

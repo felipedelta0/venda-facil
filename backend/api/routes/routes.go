@@ -1,9 +1,8 @@
 package routes
 
 import (
-	"venda-facil/api/controllers"
-
 	"github.com/gin-gonic/gin"
+	"vendaFacil/api/controllers"
 )
 
 func SetupRoutes(router *gin.Engine) {
