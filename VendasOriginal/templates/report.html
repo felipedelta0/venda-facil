@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Relatórios{% endblock %}
+{% block content %}
+<h1>Relatórios de Vendas e Estoque</h1>
+
+<h2>Vendas (Últimos 30 dias)</h2>
+<canvas id="salesChart" width="400" height="200"></canvas>
+<script>
+// Converter os dados do Python para JavaScript usando o filtro tojson
+var chartData = {{ chart_data|tojson }};
+var labels = chartData.map(item => item.day);
+var quantities = chartData.map(item => item.total_quantity);
+var values = chartData.map(item => item.total_value);
+
+var ctx = document.getElementById('salesChart').getContext('2d');
+var salesChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Quantidade Vendida',
+        data: quantities,
+        fill: false,
+        borderColor: 'blue',
+        tension: 0.1
+      },
+      {
+        label: 'Valor Total (R$)',
+        data: values,
+        fill: false,
+        borderColor: 'green',
+        tension: 0.1
+      }
+    ]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
+
+<h2>Estoque Atual</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Produto</th>
+      <th>Estoque</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.stock }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
