@@ -2,6 +2,7 @@ from app.extensions import db
 from app.models.product import Product
 from flask import flash
 
+
 def create_product(name, description, price, stock):
     if not name or not price or not stock:
         flash("Preencha os campos obrigatórios!")
@@ -19,6 +20,7 @@ def create_product(name, description, price, stock):
     db.session.commit()
     flash("Produto cadastrado!")
     return product
+
 
 def update_product(product, name, description, price, stock):
     product.name = name or product.name
