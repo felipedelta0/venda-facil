@@ -7,15 +7,26 @@
     <label for="product_id" class="form-label">Produto</label>
     <select name="product_id" id="product_id" class="form-select" required>
       {% for product in products %}
-      <option value="{{ product.id }}">{{ product.name }} (Estoque: {{ product.stock }})</option>
+        <option value="{{ product.id }}">
+          {{ product.name }} (Estoque: {{ product.stock }})
+        </option>
       {% endfor %}
     </select>
   </div>
   <div class="mb-3">
     <label for="quantity" class="form-label">Quantidade</label>
-    <input type="number" name="quantity" id="quantity" class="form-control" min="1" required>
+    <input
+      type="number"
+      name="quantity"
+      id="quantity"
+      class="form-control"
+      min="1"
+      required
+    />
   </div>
   <button type="submit" class="btn btn-primary">Registrar Venda</button>
-  <a href="{{ url_for('main_routes.index') }}" class="btn btn-secondary">Cancelar</a>
+  <a href="{{ url_for('main_routes.index') }}" class="btn btn-secondary">
+    Cancelar
+  </a>
 </form>
 {% endblock %}

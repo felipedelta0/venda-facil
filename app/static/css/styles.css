@@ -1,9 +1,5 @@
 h1 {
   font-size: 48px;
   text-align: center;
-  color: #8BC34A; /* Verde */
-  text-shadow: 2px 2px #FFC107; /* Amarelo */
-  background-image: linear-gradient(to bottom, #FF9800, #FF69B4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #8bc34a;
 }

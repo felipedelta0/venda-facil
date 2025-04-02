@@ -5,22 +5,64 @@
   <h1>Resumo de Vendas</h1>
 
   <!-- Formulário para escolher a opção e data -->
-  <form method="GET" action="{{ url_for('sale_routes.sales_summary') }}" class="mb-4">
+  <form
+    method="GET"
+    action="{{ url_for('sale_routes.sales_summary') }}"
+    class="mb-4"
+  >
     <div class="row g-3">
       <div class="col-md-4">
         <label for="option" class="form-label">Opção</label>
         <select class="form-select" id="option" name="option" required>
-          <option value="day_sales" {% if option == 'day_sales' %}selected{% endif %}>Vendas por Dia</option>
-          <option value="day_total" {% if option == 'day_total' %}selected{% endif %}>Total do Dia</option>
-          <option value="week_total" {% if option == 'week_total' %}selected{% endif %}>Total da Semana</option>
-          <option value="month_total" {% if option == 'month_total' %}selected{% endif %}>Total do Mês</option>
-          <option value="year_total" {% if option == 'year_total' %}selected{% endif %}>Total do Ano</option>
-          <option value="all_sales" {% if option == 'all_sales' %}selected{% endif %}>Todas as Vendas</option>
+          <option
+            value="day_sales"
+            {% if option == 'day_sales' %}selected{% endif %}
+          >
+            Vendas por Dia
+          </option>
+          <option
+            value="day_total"
+            {% if option == 'day_total' %}selected{% endif %}
+          >
+            Total do Dia
+          </option>
+          <option
+            value="week_total"
+            {% if option == 'week_total' %}selected{% endif %}
+          >
+            Total da Semana
+          </option>
+          <option
+            value="month_total"
+            {% if option == 'month_total' %}selected{% endif %}
+          >
+            Total do Mês
+          </option>
+          <option
+            value="year_total"
+            {% if option == 'year_total' %}selected{% endif %}
+          >
+            Total do Ano
+          </option>
+          <option
+            value="all_sales"
+            {% if option == 'all_sales' %}selected{% endif %}
+          >
+            Todas as Vendas
+          </option>
         </select>
       </div>
       <div class="col-md-4">
-        <label for="date" class="form-label">Data (para opções que exigem data)</label>
-        <input type="date" class="form-control" id="date" name="date" value="{{ date }}">
+        <label for="date" class="form-label">
+          Data (para opções que exigem data)
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          name="date"
+          value="{{ date }}"
+        />
       </div>
       <div class="col-md-4 align-self-end">
         <button type="submit" class="btn btn-primary">Buscar</button>
