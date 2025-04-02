@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from app.extensions import db
+from app.services.product_service import create_product, update_product
 from app.models.product import Product
 
 product_routes = Blueprint('product_routes', __name__)
@@ -12,21 +12,12 @@ def new_product():
         price = request.form.get('price')
         stock = request.form.get('stock')
 
-        if not name or not price or not stock:
-            flash("Preencha os campos obrigatórios!")
+        # Chamar o serviço para criar o produto
+        product = create_product(name, description, price, stock)
+
+        if product is None:  # Caso tenha ocorrido erro
             return redirect(url_for('product_routes.new_product'))
 
-        try:
-            price = float(price)
-            stock = int(stock)
-        except ValueError:
-            flash("Preço e estoque devem ser numéricos!")
-            return redirect(url_for('product_routes.new_product'))
-
-        product = Product(name=name, description=description, price=price, stock=stock)
-        db.session.add(product)
-        db.session.commit()
-        flash("Produto cadastrado!")
         return redirect(url_for('main_routes.index'))
 
     return render_template('product_form.html', action="Novo Produto")
@@ -35,25 +26,17 @@ def new_product():
 def edit_product(product_id):
     product = Product.query.get_or_404(product_id)
     if request.method == "POST":
-        product.name = request.form.get('name', product.name)
-        product.description = request.form.get('description', product.description)
-        new_price = request.form.get('price')
-        new_stock = request.form.get('stock')
-        if new_price:
-            try:
-                product.price = float(new_price)
-            except ValueError:
-                flash("Preço inválido!")
-                return redirect(url_for('product_routes.edit_product', product_id=product_id))
-        if new_stock:
-            try:
-                product.stock = int(new_stock)
-            except ValueError:
-                flash("Estoque inválido!")
-                return redirect(url_for('product_routes.edit_product', product_id=product_id))
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = request.form.get('price')
+        stock = request.form.get('stock')
 
-        db.session.commit()
-        flash("Produto atualizado!")
+        # Chamar o serviço para atualizar o produto
+        updated_product = update_product(product, name, description, price, stock)
+
+        if updated_product is None:  # Caso tenha ocorrido erro
+            return redirect(url_for('product_routes.edit_product', product_id=product_id))
+
         return redirect(url_for('main_routes.index'))
 
     return render_template('product_form.html', action="Editar Produto", product=product)
