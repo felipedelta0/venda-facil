@@ -11,10 +11,17 @@ def new_product():
         name = request.form.get("name")
         description = request.form.get("description")
         price = request.form.get("price")
+        cost = request.form.get("cost")
         stock = request.form.get("stock")
+        brand = request.form.get("brand")
+        size = request.form.get("size")
+        category = request.form.get("category")
+        color = request.form.get("color")
 
         # Chamar o serviço para criar o produto
-        product = create_product(name, description, price, stock)
+        product = create_product(
+            name, description, price, cost, stock, brand, size, category, color
+        )
 
         if product is None:  # Caso tenha ocorrido erro
             return redirect(url_for("product_routes.new_product"))
@@ -31,10 +38,17 @@ def edit_product(product_id):
         name = request.form.get("name")
         description = request.form.get("description")
         price = request.form.get("price")
+        cost = request.form.get("cost")
         stock = request.form.get("stock")
+        brand = request.form.get("brand")
+        size = request.form.get("size")
+        category = request.form.get("category")
+        color = request.form.get("color")
 
         # Chamar o serviço para atualizar o produto
-        updated_product = update_product(product, name, description, price, stock)
+        updated_product = update_product(
+            product, name, description, price, cost, stock, brand, size, category, color
+        )
 
         if updated_product is None:  # Caso tenha ocorrido erro
             return redirect(
