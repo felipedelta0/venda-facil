@@ -3,10 +3,12 @@ from app.models.sale import Sale
 from app.models.product import Product
 from sqlalchemy import func
 import datetime
-
+import pytz
 
 def generate_sales_report():
-    today = datetime.datetime.utcnow().date()
+    #today = datetime.datetime.utcnow().date()
+    today = datetime.datetime.now(pytz.timezone('America/Sao_Paulo')).date()
+
     start_date = today - datetime.timedelta(days=30)
 
     sales_data = (
