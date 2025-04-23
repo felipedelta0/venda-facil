@@ -3,7 +3,7 @@ from app.models.product import Product
 from app.models.sale import Sale
 from sqlalchemy import func
 import datetime
-
+import pytz
 
 def create_sale(product_id, quantity):
     product = Product.query.get_or_404(product_id)
@@ -11,7 +11,8 @@ def create_sale(product_id, quantity):
         return None, "Estoque insuficiente!"
 
     total_price = product.price * quantity
-    sale = Sale(product_id=product.id, quantity=quantity, total_price=total_price)
+    sale_date = datetime.datetime.now(pytz.timezone('America/Sao_Paulo'))
+    sale = Sale(product_id=product.id, quantity=quantity, total_price=total_price, sale_date=sale_date)
 
     product.stock -= quantity
     db.session.add(sale)
