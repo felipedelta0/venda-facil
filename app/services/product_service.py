@@ -1,7 +1,8 @@
 from app.extensions import db
 from app.models.product import Product
 from flask import flash
-
+import pytz
+import datetime
 
 def create_product(name, description, price, cost, stock, brand, size, category, color):
     if (
@@ -24,6 +25,8 @@ def create_product(name, description, price, cost, stock, brand, size, category,
     except ValueError:
         flash("Preço, custo e estoque devem ser numéricos!")
         return None
+    
+    created_at = datetime.datetime.now(pytz.timezone('America/Sao_Paulo'))
 
     product = Product(
         name=name,
@@ -35,6 +38,7 @@ def create_product(name, description, price, cost, stock, brand, size, category,
         size=size,
         category=category,
         color=color,
+        created_at=created_at,
     )
     db.session.add(product)
     db.session.commit()
