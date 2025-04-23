@@ -20,3 +20,5 @@ def create_app():
     app.register_blueprint(report_routes, url_prefix="/reports")
 
     return app
+
+app = create_app()
