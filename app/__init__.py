@@ -6,7 +6,7 @@ from .routes import main_routes, product_routes, sale_routes, report_routes
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "sua_chave_secreta"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://postgres:delta@localhost:5432/venda_facil"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
