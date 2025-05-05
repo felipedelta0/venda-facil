@@ -1,12 +1,16 @@
+import os
+
 from flask import Flask
 from .extensions import db
 from .routes import main_routes, product_routes, sale_routes, report_routes
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "sua_chave_secreta"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://postgres:delta@localhost:5432/venda_facil"
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
