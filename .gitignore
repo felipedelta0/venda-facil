@@ -179,4 +179,5 @@ app/models/__pycache__/
 app/routes/__pycache__/
 app/services/__pycache__/
 
-migrations/
+migrations/__pycache__/
+migrations/version/
